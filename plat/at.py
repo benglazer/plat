@@ -9,7 +9,7 @@ from subprocess import PIPE, STDOUT
 
 from dateutil.parser import parse as parse_datetime
 
-from utils import has_timezone, apply_local_timezone, now_local_timezone, strip_seconds
+from .utils import has_timezone, apply_local_timezone, now_local_timezone, strip_seconds
 
 
 AT_DATETIME_FORMAT = '%H:%M %m%d%Y'
@@ -38,7 +38,7 @@ def job_records():
             elif os_name == 'Darwin':
                 timestamp_str = attribs
             else:
-                raise OSError("Unsupported platform '%s'" % os_name)
+                raise OSError("Unsupported platform '{}'".format(os_name))
             full_command = job_full_command(job_id)  # includes any env settings
             jobs.append({
                 'id': job_id,
@@ -63,9 +63,7 @@ def print_jobs():
     for job in job_records():
         command = job['command']
         timestamp = job['timestamp'].isoformat().replace('T', ' ')[:-3]
-        print '%s\t%s\t%s' % (job['id'],
-                              timestamp,
-                              command)
+        print('\t'.join((job['id'], timestamp, command)))
 
 
 def print_recreate_jobs_script():
@@ -77,8 +75,9 @@ def print_recreate_jobs_script():
     captured by the `at` job, which may be a critical omission.
     """
     for job in job_records():
-        print 'echo "%s" | at %s' % (job['command'],
-                                     job['timestamp'].strftime(AT_DATETIME_FORMAT))
+        cmd = job['command']
+        when = job['timestamp'].strftime(AT_DATETIME_FORMAT)
+        print('echo "{}" | at {}'.format(cmd, when))
 
 
 def schedule_job(command, run_at):
