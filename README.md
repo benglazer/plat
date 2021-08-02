@@ -24,7 +24,7 @@ available in the current path.
 ## Platforms
 
 The output of the at command varies slightly by platform; plat
-handles recent versions of Linux and macOS (neé Mac OS X). Windows is
+handles recent versions of Linux and macOS (née Mac OS X). Windows is
 currently unsupported (contributions welcome).
 
 
