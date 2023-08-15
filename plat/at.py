@@ -100,7 +100,7 @@ def schedule_job(command, run_at):
     # Pipe the text of the command to be run into the at command.
     proc = subprocess.Popen(('at', run_at.strftime(AT_DATETIME_FORMAT)),
                             stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-    output = proc.communicate(command + '\n')[0]
+    output = str(proc.communicate(command + '\n')[0])
 
     # Extract job_id from output
     mo = re.match(r'^job (\d+)', output)
