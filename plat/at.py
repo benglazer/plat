@@ -19,7 +19,7 @@ def job_full_command(job_id):
     """Return a string containing the full set of commands run as part
     of a scheduled job.
     """
-    return subprocess.check_output(['at', '-c', job_id])
+    return subprocess.check_output(['at', '-c', job_id], text=True, encoding='latin-1')
 
 
 def job_records():
@@ -30,7 +30,7 @@ def job_records():
 
     # Build a list of job records.
     jobs = []
-    for row in subprocess.check_output('atq').split('\n'):
+    for row in subprocess.check_output('atq', text=True, encoding='latin-1').split('\n'):
         if row:
             job_id, attribs = row.split('\t')
             if os_name == 'Linux':
