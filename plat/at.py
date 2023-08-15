@@ -119,3 +119,7 @@ def clear_jobs():
     for job_id in job_ids:
         remove_job(job_id)
     return job_ids
+
+
+if __name__ == '__main__':
+    print_jobs()
