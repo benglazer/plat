@@ -6,6 +6,9 @@ from setuptools import setup, find_packages
 with open('README.md') as f:
     long_description = f.read()
 
+with open('requirements.txt', 'r') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name='plat',
     version='0.1',
@@ -18,6 +21,7 @@ setup(
     license='MIT',
     license_files=['LICENSE'],
     packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=requirements,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
