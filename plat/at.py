@@ -9,7 +9,7 @@ from subprocess import PIPE, STDOUT
 
 from dateutil.parser import parse as parse_datetime
 
-from .utils import has_timezone, apply_local_timezone, now_local_timezone, strip_seconds
+from utils import has_timezone, apply_local_timezone, now_local_timezone, strip_seconds
 
 
 AT_DATETIME_FORMAT = '%H:%M %m%d%Y'
